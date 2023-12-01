@@ -1,36 +1,53 @@
+import React, { useState } from 'react';
 
-import React from 'react';
-import { Bar } from 'react-chartjs-2';
+const AddUserForm = ({ addUser }) => {
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
 
-const data = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [
-    {
-      label: 'My First dataset',
-      backgroundColor: 'rgba(255,99,132,0.2)',
-      borderColor: 'rgba(255,99,132,1)',
-      borderWidth: 1,
-      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-      hoverBorderColor: 'rgba(255,99,132,1)',
-      data: [65, 59, 80, 81, 56, 55, 40]
-    }
-  ]
-};
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser((prevUser) => ({ ...prevUser, [name]: value }));
+  };
 
-const BarChart = (props) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Validate the form fields if needed
+    // ...
+
+    // Pass the user data to the parent component or perform other actions
+    addUser(user);
+
+    // Reset the form
+    setUser({
+      name: '',
+      email: '',
+      password: '',
+    });
+  };
 
   return (
-
-
-    <Bar
-      data={data}
-
-
-      options={{
-        maintainAspectRatio: false
-      }}
-    />
-
+    <form onSubmit={handleSubmit}>
+      <label>
+        Name:
+        <input type="text" name="name" value={user.name} onChange={handleChange} />
+      </label>
+      <br />
+      <label>
+        Email:
+        <input type="email" name="email" value={user.email} onChange={handleChange} />
+      </label>
+      <br />
+      <label>
+        Password:
+        <input type="password" name="password" value={user.password} onChange={handleChange} />
+      </label>
+      <br />
+      <button type="submit">Add User</button>
+    </form>
   );
-}
-export default BarChart
+};
+
+export default AddUserForm;

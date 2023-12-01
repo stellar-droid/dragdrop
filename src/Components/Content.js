@@ -33,7 +33,7 @@ const Content = (props) => {
         accept: ItemTypes.CARD,
         drop: (item, monitor) => {
 
-            if (row.length < 4) {
+            if (row.length < 10) {
                 setRow((old) => {
                     props.change([...old, { name: item.name, id: item.id }])
                     return ([...old, { name: item.name, id: item.id }])
@@ -41,7 +41,7 @@ const Content = (props) => {
 
             }
             else {
-                alert("Maximum 4 items allowed on a row")
+                alert("Maximum 10 items allowed on a row")
             }
 
         },

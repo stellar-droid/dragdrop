@@ -1,44 +1,44 @@
-import { helpers } from 'chart.js';
-import React, { useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
+import React, { useState } from 'react';
 
+const UserList = ({ users, deleteUser }) => {
+  return (
+    <ul>
+      {users && users.length > 0 ? (
+        users.map((user) => (
+          <li key={user.id}>
+            {user.name} - {user.email}
+            <button onClick={() => deleteUser(user.id)}>Delete</button>
+          </li>
+        ))
+      ) : (
+        <li>No users available</li>
+      )}
+    </ul>
+  );
+};
 
+const App = () => {
+  const [users, setUsers] = useState([
+    { id: 1, name: 'John Doe', email: 'john@example.com', password: 'password1' },
+    { id: 2, name: 'Jane Doe', email: 'jane@example.com', password: 'password2' },
+  ]);
 
-const LineChart = (props) => {
+  const addUser = (newUser) => {
+    // Assuming you have some logic to generate a unique ID for the new user
+    newUser.id = Math.max(...users.map((user) => user.id), 0) + 1;
+    setUsers([...users, newUser]);
+  };
 
-  const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [
-      {
-        label: 'My First dataset',
-        fill: false,
-        lineTension: 0.1,
-        backgroundColor: 'Red',
-        borderColor: 'rgba(75,192,192,1)',
-        borderCapStyle: 'butt',
-        borderDash: [],
-        borderDashOffset: 0.0,
-        borderJoinStyle: 'miter',
-        pointBorderColor: 'rgba(75,192,192,1)',
-        pointBackgroundColor: '#fff',
-        pointBorderWidth: 1,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-        pointHoverBorderColor: 'rgba(220,220,220,1)',
-        pointHoverBorderWidth: 2,
-        pointRadius: 1,
-        pointHitRadius: 10,
-        data: [65, 59, 80, 81, 56, 55, 40]
-      }
-    ]
+  const deleteUser = (userId) => {
+    setUsers(users.filter((user) => user.id !== userId));
   };
 
   return (
-
-
-    <Line data={data} options={{ maintainAspectRatio: false }} />
-
+    <div>
+      <h1>User Management</h1>
+      <UserList users={users} deleteUser={deleteUser} />
+    </div>
   );
-}
+};
 
-export default LineChart
+export default App;

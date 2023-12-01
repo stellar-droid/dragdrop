@@ -12,9 +12,9 @@ const Sidebar=(props)=>{
         {name:"Pie",id:3}
     ]
     return(
-    <div style={{backgroundColor:"#EBEBEB",width:300,display:"flex",flexDirection:"column",alignItems:"center"}}>
+    <div style={{backgroundColor:"#EBEBEB",width:300,display:"flex",flexDirection:"row",alignItems:"center"}}>
         <br></br>
-        <h3 style={{color:"black",margin:10}}>Widgets</h3>
+        <h3 style={{color:"black",margin:10}}>Components</h3>
         {list.map((ele,index)=>{
             if(ele.name==="Line"){
                 return(<LineCard key={index} name={ele.name} _id={ele.id}></LineCard>)
