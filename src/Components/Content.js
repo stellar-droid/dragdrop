@@ -15,10 +15,11 @@ const Content = (props) => {
     const [layout, setLayout] = useState([
         { i: 1, x: 0, y: 0, w: 1, h: 1, minH: 1, maxH: 1 },         // *** -- minH & maxH doesnt effect the grid items
         { i: 2, x: 2, y: 0, w: 1, h: 1, minH: 1, maxH: 1 },
+        
         // {i: '3', x: 0, y: 0, w: 1, h: 1, minH: 1, maxH: 1},
         // {i: '4', x: 0, y: 0, w: 1, h: 1, minH: 1, maxH: 1}
     ])
-    const [resizeplotly, setResizePlotly] = useState(false)
+    // const [resizeplotly, setResizePlotly] = useState(false)
     const onLayoutChange = (layout) => {
         setLayout(layout)
     }
@@ -56,7 +57,6 @@ const Content = (props) => {
 
             <div ref={drop} style={{ maxWidth: "100%", height: "auto" }}>
                 <ReactGridLayout
-
                     compactType={"horizontal"}
                     // rowHeight= {200} 
                     cols={4}
@@ -66,10 +66,10 @@ const Content = (props) => {
                     onLayoutChange={onLayoutChange}
                     // draggableHandle=".MyDragHandleClassName"
                     draggableCancel=".MyDragCancel"
-                    isBounded={true}
+                    // isBounded={false}
                 >
                     {row.length !== 0 ? row.map((ele, index) => {
-                        console.log(index)
+                        // console.log(index)
                         return (
 
                             <div key={index + 1}   >
